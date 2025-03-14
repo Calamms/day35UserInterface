@@ -1,4 +1,5 @@
 import streamlit as st
+import requests
 
 import numpy as np
 import pandas as pd
@@ -21,3 +22,7 @@ line_count = st.slider('Select a line count', 1, 10, 3)
 head_df = df.head(line_count)
 
 head_df
+
+url = "https://api-866662164769.europe-west1.run.app/predict?day_of_week=2&time=3"
+response = requests.get(url).json()
+print("esponse: ", response)
