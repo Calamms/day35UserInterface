@@ -23,6 +23,17 @@ head_df = df.head(line_count)
 
 head_df
 
-url = "https://api-866662164769.europe-west1.run.app/predict?day_of_week=2&time=3"
-response = requests.get(url).json()
-print("esponse: ", response)
+x = st.text_input("Enter day_of_week (X)", value="2")
+y = st.text_input("Enter time (Y)", value="3")
+
+# Bouton pour lancer la prédiction
+if st.button("Predict"):
+    # Construction dynamique de l'URL
+    url = f"https://api-866662164769.europe-west1.run.app/predict?day_of_week={x}&time={y}"
+
+    try:
+        # Requête vers l'API
+        response = requests.get(url).json()
+        st.text_area("API Response", value=str(response), height=150)
+    except Exception as e:
+        st.error(f"Error: {e}")
